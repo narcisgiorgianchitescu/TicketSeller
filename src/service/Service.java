@@ -28,7 +28,7 @@ public class Service{
         return ev;
     }
     
-    public static Client createFakeCliend(int id) {
+    public static Client createFakeClient(int id) {
         double money = 200;
         String name = "Client" + id;
         String cnp = "19906071850" + id + id;
@@ -39,7 +39,7 @@ public class Service{
 
     public static void main(String[] args) {
         Event event = createFakeEvent();
-        Client client = createFakeCliend(12);
+        Client client = createFakeClient(12);
         EventManager eventManager = new EventManager(event);
         client.buyTickets(eventManager, 3);
         System.out.println(client.getMoney());

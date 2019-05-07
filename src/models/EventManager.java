@@ -1,5 +1,6 @@
 package models;
 
+import service.AuditService;
 import users.Client;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.TreeSet;
 
 public class EventManager {
     private Event event;
+    private AuditService auditService = new AuditService();
 
     public EventManager(Event event) {
         this.event = event;
@@ -32,6 +34,7 @@ public class EventManager {
 
     public void addSpecialTicket(Ticket ticket) {
         this.event.getSpecialTicketList().add(ticket);
+        auditService.auditAction("addSpecialTicket");
     }
 
     public void removeTickets(List<Ticket> ticketList) {
@@ -55,6 +58,7 @@ public class EventManager {
                 return;
             }
         }
+        auditService.auditAction("buyTicket");
     }
 
     public void buyTickets(Client client, int n) {
@@ -69,6 +73,7 @@ public class EventManager {
         }
         client.getTicketList().addAll(ticketList);
         removeTickets(ticketList);
+        auditService.auditAction("buyTickets");
     }
 
 }
